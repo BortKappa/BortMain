@@ -25,7 +25,6 @@
       overflow: hidden;
     }
 
-    /* Fondo de video */
     video.background-video {
       position: absolute;
       top: 0;
@@ -56,10 +55,12 @@
     .socials {
       display: flex;
       gap: 30px;
-      margin-top: 3rem;
-      z-index: 10;
       position: absolute;
       bottom: 20px;
+      justify-content: center;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
     }
 
     .socials a img {
@@ -74,11 +75,10 @@
       filter: grayscale(0%) drop-shadow(0 0 10px #00ffc3);
     }
 
-    /* Estilos para los botones */
     .button-container {
       position: absolute;
       top: 50%;
-      left: 2%; /* Mover los botones más a la izquierda */
+      left: 2%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
@@ -88,8 +88,8 @@
 
     .button-dot {
       position: relative;
-      width: 30px;  /* Aumentado el tamaño del botón */
-      height: 30px; /* Aumentado el tamaño del botón */
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background-color: #8a00ff;
       cursor: pointer;
@@ -97,7 +97,7 @@
     }
 
     .button-dot:hover .line {
-      width: 350px;  /* Línea más larga */
+      width: 350px;
       opacity: 1;
     }
 
@@ -120,77 +120,119 @@
     .hover-video {
       position: absolute;
       top: 50%;
-      left: 100%;  /* Ajuste para mover los videos a la derecha */
-      transform: translate(10px, -50%); /* Mover un poco más hacia la derecha */
-      width: 220px;  /* Aumentado el tamaño del video */
-      height: 220px; /* Aumentado el tamaño del video */
+      left: 100%;
+      transform: translate(10px, -50%);
+      width: 220px;
+      height: 220px;
       opacity: 0;
       pointer-events: none;
     }
 
-    /* Estilos para la animación de la página */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    .fade-in {
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    /* Estilos para el botón "Bot de Discord" */
-    .discord-bot-button {
+    .info-button,
+    .discord-bot-button,
+    .patreon-button {
       position: absolute;
-      top: 50%; /* Centrado en la pantalla */
-      left: 15%; /* Movido más a la derecha */
-      transform: translateY(-50%);
       padding: 15px 30px;
-      background-color: #8a00ff;
-      color: #fff;
       font-size: 1.5rem;
       font-weight: bold;
       border-radius: 10px;
       text-decoration: none;
       text-align: center;
-      box-shadow: 0 0 15px rgba(138, 0, 255, 0.7);
       transition: background-color 0.3s ease, transform 0.3s ease;
+      color: #fff;
+      z-index: 10;
     }
 
-    .discord-bot-button:hover {
-      background-color: #6a00cc;
-      transform: translateY(-50%) scale(1.05);
+    .info-button {
+      top: 35%;
+      left: 15%;
+      background-color: #8a00ff;
+      box-shadow: 0 0 15px rgba(138, 0, 255, 0.7);
     }
 
-    /* Estilo para la imagen de la chica anime */
-    .discord-bot-button .anime-girl {
+    .discord-bot-button {
+      top: 45%;
+      left: 15%;
+      background-color: #8a00ff;
+      box-shadow: 0 0 15px rgba(138, 0, 255, 0.7);
+    }
+
+    .patreon-button {
+      top: 55%;
+      left: 15%;
+      background-color: orange;
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+    }
+
+    .info-button:hover,
+    .discord-bot-button:hover,
+    .patreon-button:hover {
+      transform: scale(1.05);
+    }
+
+    .anime-girl {
       position: absolute;
-      top: -20px;  /* Moverla un poco más arriba */
-      left: 100%;  /* Justo al lado del botón */
+      top: -20px;
+      left: 100%;
       transform: translateX(10px);
       opacity: 0;
-      width: 250px;  /* Tamaño aumentado de la imagen */
+      width: 250px;
       height: auto;
       transition: opacity 0.3s ease;
     }
 
-    .discord-bot-button:hover .anime-girl {
+    .info-button:hover .anime-girl,
+    .discord-bot-button:hover .anime-girl,
+    .patreon-button:hover .anime-girl {
       opacity: 1;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.95);
+      padding: 20px;
+      border: 2px solid #00ffc3;
+      border-radius: 15px;
+      z-index: 100;
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      display: none;
+      max-width: 90%;
+    }
+
+    .popup.show {
+      display: block;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #00ffc3;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- Video de fondo -->
+  <!-- Fondo de video -->
   <video class="background-video" muted autoplay loop preload="auto">
     <source src="https://github.com/BortKappa/BortMain/raw/main/background.mp4" type="video/mp4">
   </video>
 
-  <h1 class="fade-in">BortKappa</h1>
-  <p class="fade-in">Oficial web BortKappa, streamer y jugador de confianza</p>
+  <h1>BortKappa</h1>
+  <p>Oficial web BortKappa, streamer y jugador de confianza</p>
 
-  <!-- Botones con animación de línea -->
+  <!-- Botones laterales con video -->
   <div class="button-container">
-    <a href="https://www.youtube.com/watch?v=Mi2cHnh_GW0" target="_blank" style="text-decoration: none;">
+    <a href="https://www.youtube.com/watch?v=Mi2cHnh_GW0" target="_blank">
       <div class="button-dot">
         <div class="line"></div>
         <video class="hover-video" muted autoplay loop preload="auto">
@@ -198,8 +240,7 @@
         </video>
       </div>
     </a>
-
-    <a href="https://www.twitch.tv/idcgames/clip/VastRealGooseOptimizePrime" target="_blank" style="text-decoration: none;">
+    <a href="https://www.twitch.tv/idcgames/clip/VastRealGooseOptimizePrime" target="_blank">
       <div class="button-dot">
         <div class="line"></div>
         <video class="hover-video" muted autoplay loop preload="auto">
@@ -207,8 +248,7 @@
         </video>
       </div>
     </a>
-
-    <a href="https://www.youtube.com/watch?v=2LBeC8xkfbI" target="_blank" style="text-decoration: none;">
+    <a href="https://www.youtube.com/watch?v=2LBeC8xkfbI" target="_blank">
       <div class="button-dot">
         <div class="line"></div>
         <video class="hover-video" muted autoplay loop preload="auto">
@@ -216,8 +256,7 @@
         </video>
       </div>
     </a>
-
-    <a href="https://www.tiktok.com/@bortkappa/video/7494245830531009814" target="_blank" style="text-decoration: none;">
+    <a href="https://www.tiktok.com/@bortkappa/video/7494245830531009814" target="_blank">
       <div class="button-dot">
         <div class="line"></div>
         <video class="hover-video" muted autoplay loop preload="auto">
@@ -227,13 +266,39 @@
     </a>
   </div>
 
-  <!-- Botón de Discord Bot -->
+  <!-- Info -->
+  <button class="info-button" onclick="togglePopup()">
+    Info
+    <img src="anime-girl1.jpg" alt="Anime Girl 1" class="anime-girl">
+  </button>
+
+  <!-- Discord -->
   <a href="https://bortkappa.github.io/Bortweb/" class="discord-bot-button" target="_blank">
     Bot de Discord
-    <img src="anime-girl.jpg" alt="Chica Anime saludando" class="anime-girl">
+    <img src="anime-girl2.jpg" alt="Anime Girl 2" class="anime-girl">
   </a>
 
-  <!-- Redes sociales -->
+  <!-- Patreon -->
+  <a href="https://www.patreon.com/c/BortKappa?fromConcierge=true&redirect=true" class="patreon-button" target="_blank">
+    Patreón
+    <img src="anime-girl3.jpg" alt="Anime Girl 3" class="anime-girl">
+  </a>
+
+  <!-- Popup Info -->
+  <div id="popup" class="popup">
+    <button class="close-btn" onclick="togglePopup()">×</button>
+    <strong>ZULA</strong> - Leyenda top 1 EU<br>
+    <strong>Fortnite</strong> - Top España 40/50 (Solo/Duo/Squad K/D)<br>
+    <strong>CSGO</strong> - Elite mundial, semi-profesional player 1º división<br>
+    <strong>Overwatch</strong> - Diamante/Master<br>
+    <strong>Ring Of Elysium</strong> - Top 100 Kills<br>
+    <strong>CoD Warzone</strong> - Top 3%<br>
+    <strong>Battlerite Royale</strong> - Top 103 EU<br>
+    <strong>Delta Force</strong> - Top global<br>
+    <strong>Rocket League</strong> - Champion
+  </div>
+
+  <!-- Redes Sociales -->
   <div class="socials">
     <a href="https://www.twitch.tv/bortkappa" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/5968/5968819.png" alt="Twitch">
@@ -249,5 +314,13 @@
     </a>
   </div>
 
+  <script>
+    function togglePopup() {
+      const popup = document.getElementById('popup');
+      popup.classList.toggle('show');
+    }
+  </script>
+
 </body>
 </html>
+
